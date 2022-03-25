@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Provider} from 'react-redux';
 
-function App() {
+import Calendar from './components/Calendar/Calendar';
+import TodoList from 'components/TotoList/TodoList';
+
+import store from 'store/store';
+import StyledThemeProvider from 'ui/StyledThemeProvider';
+import AppContainer from 'ui/AppContainer';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <StyledThemeProvider>
+        <AppContainer>
+          <TodoList />
+          <Calendar />
+        </AppContainer>
+      </StyledThemeProvider>
+    </Provider>
   );
-}
+};
 
 export default App;
