@@ -7,6 +7,11 @@ const MainStyles = styled.div`
   font-family: ${({theme}) => theme.font.family};
   font-size: ${({theme}) => theme.font.size};
   color: ${({theme}) => theme.font.color};
+  * {
+    transition: all 0.2s linear;
+  }
+
+  transition: all 0.2s linear;
 
   button {
     font-family: ${({theme}) => theme.font.family};

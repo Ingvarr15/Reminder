@@ -2,10 +2,10 @@ type Ttheme = {
   font: {
     family: string;
     size: string;
-    color: string;
   };
   colors: {
     background: string;
+    font: string;
   };
 };
 
@@ -18,20 +18,20 @@ const theme: Tthemes = {
     font: {
       family: 'Roboto Condensed',
       size: '14px',
-      color: '#000814',
     },
     colors: {
       background: '#FFFFFF',
+      font: '#000814',
     },
   },
   dark: {
     font: {
       family: 'Roboto Condensed',
       size: '14px',
-      color: '#d6d6d6',
     },
     colors: {
       background: '#333333',
+      font: '#d6d6d6',
     },
   },
 };
