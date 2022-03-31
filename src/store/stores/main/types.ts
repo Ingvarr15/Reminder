@@ -1,6 +1,6 @@
 export type TTodo = {
   id: string;
-  text: string;
+  title: string;
   badge:
     | 'pink'
     | 'red'
@@ -15,5 +15,5 @@ export type TTodo = {
     | 'volcano'
     | 'gold'
     | 'lime';
-  date?: Date;
+  date?: any;
 };

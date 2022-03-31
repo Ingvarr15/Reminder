@@ -1,11 +1,16 @@
+import darken from 'polished/lib/color/darken';
+// import lighten from 'polished/lib/color/lighten';
+
 type Ttheme = {
   font: {
     family: string;
     size: string;
   };
   colors: {
+    primary: string;
     background: string;
     font: string;
+    darken: string;
   };
 };
 
@@ -13,25 +18,41 @@ interface Tthemes {
   [key: string]: Ttheme;
 }
 
+const commonTheme = {
+  font: {
+    family: 'Roboto Condensed',
+    size: '14px',
+  },
+};
+
 const theme: Tthemes = {
-  light: {
-    font: {
-      family: 'Roboto Condensed',
-      size: '14px',
-    },
+  orangeGreen: {
+    ...commonTheme,
     colors: {
-      background: '#FFFFFF',
-      font: '#000814',
+      primary: '#6965ee',
+      background:
+        'linear-gradient(45deg, rgba(255,154,0,1) 0%, rgba(38,145,0,1) 100%)',
+      font: '#ffffff',
+      darken: darken(0.03, '#6965ee'),
+    },
+  },
+  bluePurple: {
+    ...commonTheme,
+    colors: {
+      primary: '#45c10f',
+      background:
+        'linear-gradient(45deg, rgba(141,0,255,1) 25%, rgba(0,164,255,1) 100%)',
+      font: '#ffffff',
+      darken: darken(0.06, '#45c10f'),
     },
   },
   dark: {
-    font: {
-      family: 'Roboto Condensed',
-      size: '14px',
-    },
+    ...commonTheme,
     colors: {
+      primary: '#ffab00',
       background: '#333333',
-      font: '#d6d6d6',
+      font: '#ffffff',
+      darken: darken(0.2, '#5550e6'),
     },
   },
 };

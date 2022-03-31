@@ -7,18 +7,12 @@ interface Main {
 }
 
 const initialState: Main = {
-  theme: 'light',
+  theme: 'orangeGreen',
   todos: [
     {
       badge: 'green',
-      text: 'This is warning event.',
-      date: new Date('3/5/22'),
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'red',
-      text: '123',
-      date: new Date('3/16/22'),
+      title: 'Go to the shop',
+      date: '2022-03-31T13:07:38.083Z',
       id: Math.random().toString().substring(2, 7),
     },
   ],
