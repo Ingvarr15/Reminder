@@ -11,6 +11,42 @@ const initialState: Main = {
   todos: [
     {
       badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
+      title: 'Go to the shop and blablabla',
+      date: '2022-03-23T13:07:38.083Z',
+      id: Math.random().toString().substring(2, 7),
+    },
+    {
+      badge: 'green',
       title: 'Go to the shop',
       date: '2022-03-31T13:07:38.083Z',
       id: Math.random().toString().substring(2, 7),

@@ -4,6 +4,10 @@ const StyledCalendar = styled.div`
   width: 60%;
   padding-left: 10px;
 
+  .fc-daygrid-day-frame {
+    max-height: 25px !important;
+  }
+
   .fc-daygrid-event-dot {
     border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid #6c37d8;
   }
@@ -28,7 +32,15 @@ const StyledCalendar = styled.div`
   }
 
   .fc-day-today {
-    background-color: ${({theme}) => theme.colors.primary + 63} !important;
+    background-color: ${({theme}) => theme.colors.primary + 43} !important;
+  }
+
+  .fc-daygrid-event-dot {
+    border-color: ${({theme}) => theme.colors.primary} !important;
+  }
+
+  .fc-day-today .fc-daygrid-event-dot {
+    border-color: gold !important;
   }
 `;
 

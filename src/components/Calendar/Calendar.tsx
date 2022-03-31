@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from 'store/hooks';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import enGBlocale from '@fullcalendar/core/locales/en-gb';
+import interactionPlugin, {DateClickArg} from '@fullcalendar/interaction';
 import moment from 'moment';
 
 import StyledCalendar from './Calendar.style';
@@ -24,12 +25,16 @@ const Calendar = () => {
         dispatch(setTheme('bluePurple'));
         break;
       case 'bluePurple':
-        dispatch(setTheme('dark'));
-        break;
-      case 'dark':
         dispatch(setTheme('orangeGreen'));
         break;
+      // case 'dark':
+      //   dispatch(setTheme('orangeGreen'));
+      //   break;
     }
+  };
+
+  const handleDateClick = (props: DateClickArg) => {
+    console.log(props);
   };
 
   return (
@@ -37,20 +42,16 @@ const Calendar = () => {
       <FullCalendar
         locale={enGBlocale}
         eventDisplay="list-item"
-        plugins={[dayGridPlugin]}
-        slotDuration={'00:45:00'}
+        plugins={[dayGridPlugin, interactionPlugin]}
         displayEventTime={false}
-        handleWindowResize={true}
-        themeSystem="bootstrap"
+        dayMaxEventRows={3}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,dayGridWeek,dayGridDay',
         }}
         events={todos}
-        editable={true}
-        droppable={true}
-        selectable={true}
+        dateClick={handleDateClick}
       />
 
       <button onClick={handleToggleTheme}>toggle theme</button>
