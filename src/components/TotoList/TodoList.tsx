@@ -5,10 +5,14 @@ import Button from 'ui/Button';
 
 import StyledTodoList from './TodoList.style';
 import {addTodo} from 'store/stores/main/mainSlice';
+import {useAppSelector} from 'store/hooks';
 
 const TodoList = () => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
+  const {todos} = useAppSelector(({main}) => ({
+    todos: main.todos,
+  }));
 
   const handleAddTodo = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -40,6 +44,15 @@ const TodoList = () => {
           Add
         </Button>
       </form>
+      <div className="todo-list">
+        <ul className="todo-list__inner">
+          {todos.map((todo) => (
+            <li className="todo-list__item" key={todo.id}>
+              {todo.title}
+            </li>
+          ))}
+        </ul>
+      </div>
     </StyledTodoList>
   );
 };

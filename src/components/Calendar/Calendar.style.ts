@@ -101,8 +101,8 @@ const StyledCalendar = styled.div`
   }
 
   .badge {
-    width: 18px;
-    height: 18px;
+    width: ${({theme}) => parseInt(theme.font.size) * 1.1}px;
+    height: ${({theme}) => parseInt(theme.font.size) * 1.1}px;
     position: absolute;
     right: 10%;
     bottom: 10%;
@@ -112,6 +112,7 @@ const StyledCalendar = styled.div`
     border-radius: 10px;
     background-color: ${({theme}) => theme.colors.primary};
     font-size: 12px;
+    font-size: ${({theme}) => parseInt(theme.font.size) * 0.8}px;
     text-align: center;
   }
 

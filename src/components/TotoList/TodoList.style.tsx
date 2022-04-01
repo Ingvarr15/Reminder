@@ -7,7 +7,7 @@ const StyledTodoList = styled.div`
 
   h1 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-size: 50px;
+    font-size: 60px;
     text-align: center;
     margin-bottom: 10px;
   }
@@ -36,6 +36,20 @@ const StyledTodoList = styled.div`
     &:focus {
       border-color: ${({theme}) => theme.colors.darken};
     }
+  }
+
+  .todo-list__inner {
+    padding: 10px;
+    list-style: none;
+  }
+
+  .todo-list__item {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: ${({theme}) => theme.colors.blur};
+    border: 2px solid;
+    border-color: ${({theme}) => theme.colors.primary};
+    border-radius: 3px;
   }
 `;
 
