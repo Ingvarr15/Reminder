@@ -1,23 +1,34 @@
-import React from 'react';
-import {Provider} from 'react-redux';
+import React, {useEffect} from 'react';
 
-import Calendar from './components/Calendar/Calendar';
+import Links from 'components/Links/Links';
 import TodoList from 'components/TotoList/TodoList';
+import Calendar from './components/Calendar/Calendar';
 
-import store from 'store/store';
 import StyledThemeProvider from 'ui/StyledThemeProvider';
 import AppContainer from 'ui/AppContainer';
+import {useAppDispatch, useAppSelector} from 'store/hooks';
+import {loadState, saveState} from 'store/stores/main/mainSlice';
 
 const App = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(loadState());
+  }, []);
+
+  useEffect(() => {
+    dispatch(saveState());
+  }, [state]);
+
   return (
-    <Provider store={store}>
-      <StyledThemeProvider>
-        <AppContainer>
-          <TodoList />
-          <Calendar />
-        </AppContainer>
-      </StyledThemeProvider>
-    </Provider>
+    <StyledThemeProvider>
+      <AppContainer>
+        <Links />
+        <TodoList />
+        <Calendar />
+      </AppContainer>
+    </StyledThemeProvider>
   );
 };
 

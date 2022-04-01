@@ -1,68 +1,52 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TTodo} from './types';
 
-interface Main {
+interface IMain {
   theme: string;
   todos: TTodo[];
 }
 
-const initialState: Main = {
+const initialState: IMain = {
   theme: 'orangeGreen',
-  todos: [
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop and blablabla',
-      date: '2022-03-23T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-    {
-      badge: 'green',
-      title: 'Go to the shop',
-      date: '2022-03-31T13:07:38.083Z',
-      id: Math.random().toString().substring(2, 7),
-    },
-  ],
+  todos: [],
 };
 
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
+    loadState: (state) => {
+      if (localStorage.getItem('ToDo-List')) {
+        const loadedState: IMain = JSON.parse(
+          localStorage.getItem('ToDo-List') || '',
+        );
+        state.theme = loadedState.theme || initialState.theme;
+        state.todos = loadedState.todos || initialState.todos;
+      }
+    },
+    saveState: (state) => {
+      localStorage.setItem('ToDo-List', JSON.stringify(state));
+    },
     setTheme: (state, {payload}: PayloadAction<string>) => {
       state.theme = payload;
+    },
+    addTodo: (state, {payload}: PayloadAction<TTodo>) => {
+      state.todos.push(payload);
+    },
+    checkTodo: (state, {payload}: PayloadAction<string>) => {
+      state.todos.forEach((todo) => {
+        if (todo.id === payload) {
+          todo.done = !todo.done;
+        }
+      });
+    },
+    deleteTodo: (state, {payload}: PayloadAction<string>) => {
+      const filteredTodos = state.todos.filter((todo) => todo.id !== payload);
+      state.todos = filteredTodos;
     },
   },
 });
 
-export const {setTheme} = mainSlice.actions;
+export const {loadState, saveState, setTheme, addTodo, checkTodo, deleteTodo} =
+  mainSlice.actions;
 export default mainSlice.reducer;

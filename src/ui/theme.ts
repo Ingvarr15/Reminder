@@ -8,6 +8,7 @@ type Ttheme = {
   };
   colors: {
     primary: string;
+    blur: string;
     background: string;
     font: string;
     darken: string;
@@ -30,6 +31,7 @@ const theme: Tthemes = {
     ...commonTheme,
     colors: {
       primary: '#6965ee',
+      blur: '#6965ee53',
       background:
         'linear-gradient(45deg, rgba(255,154,0,1) 0%, rgba(38,145,0,1) 100%)',
       font: '#ffffff',
@@ -40,6 +42,7 @@ const theme: Tthemes = {
     ...commonTheme,
     colors: {
       primary: '#45c10f',
+      blur: '#45c10f53',
       background:
         'linear-gradient(45deg, rgba(141,0,255,1) 25%, rgba(0,164,255,1) 100%)',
       font: '#ffffff',
@@ -50,6 +53,7 @@ const theme: Tthemes = {
     ...commonTheme,
     colors: {
       primary: '#ffab00',
+      blur: '#ffab0053',
       background: '#333333',
       font: '#ffffff',
       darken: darken(0.2, '#5550e6'),

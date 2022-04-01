@@ -12,11 +12,6 @@ const MainStyles = styled.div`
   }
 
   transition: all 0.2s ease;
-
-  button {
-    font-family: ${({theme}) => theme.font.family};
-    font-size: ${({theme}) => theme.font.size};
-  }
 `;
 
 export default MainStyles;
