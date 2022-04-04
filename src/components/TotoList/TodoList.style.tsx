@@ -27,6 +27,30 @@ const StyledTodoList = styled.div`
     justify-content: space-between;
   }
 
+  .view-state {
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .overall-state {
+    opacity: 0.6;
+  }
+
+  .view-all {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-style: normal;
+    color: ${({theme}) => theme.colors.primary};
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .todo-form__input {
     width: 100%;
     height: 30px;

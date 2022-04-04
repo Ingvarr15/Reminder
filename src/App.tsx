@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import Links from 'components/Links/Links';
 import TodoList from 'components/TotoList/TodoList';
@@ -10,8 +10,13 @@ import {useAppDispatch, useAppSelector} from 'store/hooks';
 import {loadState, saveState} from 'store/stores/main/mainSlice';
 
 const App = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+
+  const selectDate = (date: string) => {
+    setSelectedDate(date === selectedDate || date === null ? null : date);
+  };
 
   useEffect(() => {
     dispatch(loadState());
@@ -25,8 +30,8 @@ const App = () => {
     <StyledThemeProvider>
       <AppContainer>
         <Links />
-        <TodoList />
-        <Calendar />
+        <TodoList selectedDate={selectedDate} selectDate={selectDate} />
+        <Calendar selectDate={selectDate} />
       </AppContainer>
     </StyledThemeProvider>
   );

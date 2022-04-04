@@ -9,7 +9,7 @@ import StyledCalendar from './Calendar.style';
 import {RootState} from 'store/store';
 import {setTheme} from 'store/stores/main/mainSlice';
 
-const Calendar = () => {
+const Calendar = ({selectDate}) => {
   const [date, setDate] = useState(new Date());
   const dispatch = useAppDispatch();
   const {theme, todos} = useAppSelector(({main}: RootState) => ({
@@ -62,18 +62,13 @@ const Calendar = () => {
     }
   };
 
-  // const handleDateClick = (props) => {
-  //   console.log(props);
-  // };
-
   return (
     <StyledCalendar>
       <RCalendar
         view="month"
         locale="en-GB"
         activeStartDate={date}
-        // onClickDay={handleDateClick}
-        onChange={(e) => console.log(e)}
+        onClickDay={(value) => selectDate(moment(value).format('DD MMMM YYYY'))}
         onDrillUp={() => setDate(new Date())}
         onActiveStartDateChange={({activeStartDate}) =>
           setDate(activeStartDate)

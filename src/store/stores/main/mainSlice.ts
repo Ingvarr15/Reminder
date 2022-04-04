@@ -25,7 +25,13 @@ export const mainSlice = createSlice({
       }
     },
     saveState: (state) => {
-      localStorage.setItem('ToDo-List', JSON.stringify(state));
+      localStorage.setItem(
+        'ToDo-List',
+        JSON.stringify({
+          theme: state.theme,
+          todos: state.todos,
+        }),
+      );
     },
     setTheme: (state, {payload}: PayloadAction<string>) => {
       state.theme = payload;

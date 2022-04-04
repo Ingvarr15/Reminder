@@ -14,6 +14,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'quote-props': 0,
+    'react/prop-types': 0,
     indent: ['error', 2, {SwitchCase: 1}],
   },
 };

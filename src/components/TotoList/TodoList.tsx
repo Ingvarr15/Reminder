@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useState, useEffect} from 'react';
 import Button from 'ui/Button';
 import Checkbox from 'react-checkbox-component';
+import moment from 'moment';
 
 import StyledTodoList from './TodoList.style';
 import {
@@ -10,13 +10,14 @@ import {
   deleteTodo,
   editTodo,
 } from 'store/stores/main/mainSlice';
-import {useAppSelector} from 'store/hooks';
+import {useAppDispatch, useAppSelector} from 'store/hooks';
 
-const TodoList = () => {
+const TodoList = ({selectedDate, selectDate}) => {
+  const [filteredTodos, setFilteredTodos] = useState([]);
   const [value, setValue] = useState('');
   const [edit, setEdit] = useState(null);
   const [editValue, setEditValue] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {todos} = useAppSelector(({main}) => ({
     todos: main.todos,
   }));
@@ -50,6 +51,18 @@ const TodoList = () => {
     }
   };
 
+  useEffect(() => {
+    if (selectedDate) {
+      setFilteredTodos(
+        todos.filter(
+          (todo) => moment(todo.date).format('DD MMMM YYYY') === selectedDate,
+        ),
+      );
+    } else {
+      setFilteredTodos(todos);
+    }
+  }, [selectedDate, todos]);
+
   return (
     <StyledTodoList>
       <h1>ToDo List</h1>
@@ -65,8 +78,20 @@ const TodoList = () => {
         </Button>
       </form>
       <div className="todo-list">
+        <div className="view-state">
+          {selectedDate ? (
+            <>
+              <div>{selectedDate}:</div>
+              <div className="view-all" onClick={() => selectDate(null)}>
+                View all
+              </div>
+            </>
+          ) : (
+            <div className="overall-state">---Overall list---</div>
+          )}
+        </div>
         <ul className="todo-list__inner">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <li className="todo-list__item" key={todo.id}>
               {edit === todo.id ? (
                 <div className="todo-item__edit">
