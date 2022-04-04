@@ -62,31 +62,18 @@ const Calendar = () => {
     }
   };
 
-  // const handleDateClick = (props: DateClickArg) => {
+  // const handleDateClick = (props) => {
   //   console.log(props);
   // };
 
   return (
     <StyledCalendar>
-      {/* <FullCalendar
-        locale={enGBlocale}
-        eventDisplay="list-item"
-        plugins={[dayGridPlugin, interactionPlugin]}
-        displayEventTime={false}
-        dayMaxEventRows={3}
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay',
-        }}
-        events={todos}
-        dateClick={handleDateClick}
-      /> */}
       <RCalendar
         view="month"
         locale="en-GB"
         activeStartDate={date}
-        // onActiveStartDateChange={}
+        // onClickDay={handleDateClick}
+        onChange={(e) => console.log(e)}
         onDrillUp={() => setDate(new Date())}
         onActiveStartDateChange={({activeStartDate}) =>
           setDate(activeStartDate)

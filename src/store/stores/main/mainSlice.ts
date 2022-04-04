@@ -40,7 +40,7 @@ export const mainSlice = createSlice({
         }
       });
     },
-    changeTodo: (state, {payload}: PayloadAction<{[key: string]: string}>) => {
+    editTodo: (state, {payload}: PayloadAction<{[key: string]: string}>) => {
       state.todos.forEach((todo) => {
         if (todo.id === payload.id) {
           todo.title = payload.title;
@@ -60,7 +60,7 @@ export const {
   setTheme,
   addTodo,
   checkTodo,
-  changeTodo,
+  editTodo,
   deleteTodo,
 } = mainSlice.actions;
 export default mainSlice.reducer;

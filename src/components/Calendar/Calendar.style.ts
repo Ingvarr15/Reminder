@@ -1,49 +1,8 @@
 import styled from 'styled-components';
 
 const StyledCalendar = styled.div`
-  width: 40%;
+  width: 35%;
   padding-left: 10px;
-
-  .fc-daygrid-day-frame {
-    max-height: 25px !important;
-  }
-
-  .fc-daygrid-event-dot {
-    border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid #6c37d8;
-  }
-
-  .fc-daygrid-day-number {
-    color: ${({theme}) => theme.colors.font} !important;
-  }
-
-  .fc-button-primary {
-    background-color: ${({theme}) => theme.colors.primary};
-    border-color: ${({theme}) => theme.colors.primary} !important;
-  }
-
-  .fc-button-active {
-    background-color: ${({theme}) => theme.colors.darken} !important;
-    border-color: ${({theme}) => theme.colors.darken} !important;
-  }
-
-  .fc-button[disabled] {
-    background-color: ${({theme}) => theme.colors.darken};
-    border-color: ${({theme}) => theme.colors.darken} !important;
-  }
-
-  .fc-day-today {
-    background-color: ${({theme}) => theme.colors.primary + 43} !important;
-  }
-
-  .fc-daygrid-event-dot {
-    border-color: ${({theme}) => theme.colors.primary} !important;
-  }
-
-  .fc-day-today .fc-daygrid-event-dot {
-    border-color: gold !important;
-  }
-
-  /* -------------------------------------------------------------------- */
 
   .react-calendar {
   }
@@ -83,6 +42,10 @@ const StyledCalendar = styled.div`
     border: 1px solid;
   }
 
+  .react-calendar__tile--active {
+    background-color: ${({theme}) => theme.colors.blur} !important;
+  }
+
   .react-calendar__tile {
     height: 50px;
     position: relative;
@@ -96,8 +59,11 @@ const StyledCalendar = styled.div`
     border-color: ${({theme}) => theme.colors.font};
   }
 
-  .react-calendar__tile--now {
-    background-color: ${({theme}) => theme.colors.blur};
+  .react-calendar__tile--now abbr {
+    margin-left: -4px;
+    padding: 0 4px;
+    background-color: ${({theme}) => theme.colors.primary};
+    border-radius: 3px;
   }
 
   .badge {

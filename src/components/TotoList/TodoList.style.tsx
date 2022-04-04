@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 const StyledTodoList = styled.div`
-  width: 30%;
+  width: 35%;
   padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -12,18 +15,20 @@ const StyledTodoList = styled.div`
   }
 
   .todo-list {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
   }
 
   .todo-form {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
   }
 
   .todo-form__input {
-    width: 300px;
+    width: 100%;
     height: 30px;
     margin-right: 5px;
     padding: 4px;
@@ -41,7 +46,6 @@ const StyledTodoList = styled.div`
   }
 
   .todo-list__inner {
-    width: 350px;
     padding: 10px;
     list-style: none;
   }
@@ -51,13 +55,33 @@ const StyledTodoList = styled.div`
   }
 
   .todo-list__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 5px;
     padding: 5px 10px;
     border: 2px solid;
     border-radius: 3px;
+  }
+
+  .todo-edit__input {
+    width: 100%;
+    padding: 0;
+    font-family: ${({theme}) => theme.font.family};
+    font-size: ${({theme}) => theme.font.size};
+    color: ${({theme}) => theme.colors.font};
+    border: 0;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .todo-item__edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .todo-item__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .todo-control {
@@ -66,6 +90,7 @@ const StyledTodoList = styled.div`
   }
 
   .checkbox {
+    margin: 0 !important;
     border-color: ${({theme}) => theme.colors.primary};
     border-radius: 5px !important;
   }
@@ -75,8 +100,26 @@ const StyledTodoList = styled.div`
     border-radius: 3px !important;
   }
 
-  .fa-trash-can {
-    color: red;
+  .fa-solid {
+    pointer-events: none;
+  }
+
+  .control-button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    color: ${({theme}) => theme.colors.font};
+    background-color: ${({theme}) => theme.colors.primary};
+    border: 1px solid;
+    border-color: ${({theme}) => theme.colors.primary};
+    border-radius: 3px;
+
+    &:active {
+      background-color: ${({theme}) => theme.colors.darken};
+    }
   }
 `;
 

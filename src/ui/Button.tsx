@@ -6,11 +6,23 @@ interface TButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   scale?: number;
   className?: string;
+  disabled?: boolean;
 }
 
-const Button = ({children, onClick, scale = 1, className}: TButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  scale = 1,
+  className,
+  disabled,
+}: TButtonProps) => {
   return (
-    <StyledButton className={className} onClick={onClick} scale={scale}>
+    <StyledButton
+      className={className}
+      onClick={onClick}
+      scale={scale}
+      disabled={disabled}
+    >
       {children}
     </StyledButton>
   );
