@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-
 import Button from 'ui/Button';
+import Checkbox from 'react-checkbox-component';
 
 import StyledTodoList from './TodoList.style';
-import {addTodo} from 'store/stores/main/mainSlice';
+import {addTodo, checkTodo, deleteTodo} from 'store/stores/main/mainSlice';
 import {useAppSelector} from 'store/hooks';
 
 const TodoList = () => {
@@ -17,8 +17,14 @@ const TodoList = () => {
   const handleAddTodo = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
+    const trimedValue = value.trim();
+    if (trimedValue === '') {
+      setValue('');
+      return;
+    }
+
     const newTodo = {
-      title: value,
+      title: trimedValue,
       done: false,
       date: new Date('2022-04-23T13:07:38.083Z'),
       id: Math.random().toString().substring(2, 7),
@@ -48,7 +54,17 @@ const TodoList = () => {
         <ul className="todo-list__inner">
           {todos.map((todo) => (
             <li className="todo-list__item" key={todo.id}>
-              {todo.title}
+              <div className="todo-title">{todo.title}</div>
+              <div className="todo-control">
+                <Checkbox
+                  onChange={() => dispatch(checkTodo(todo.id))}
+                  isChecked={todo.done}
+                />
+                <i
+                  className="fa-solid fa-trash-can"
+                  onClick={() => dispatch(deleteTodo(todo.id))}
+                ></i>
+              </div>
             </li>
           ))}
         </ul>

@@ -40,6 +40,13 @@ export const mainSlice = createSlice({
         }
       });
     },
+    changeTodo: (state, {payload}: PayloadAction<{[key: string]: string}>) => {
+      state.todos.forEach((todo) => {
+        if (todo.id === payload.id) {
+          todo.title = payload.title;
+        }
+      });
+    },
     deleteTodo: (state, {payload}: PayloadAction<string>) => {
       const filteredTodos = state.todos.filter((todo) => todo.id !== payload);
       state.todos = filteredTodos;
@@ -47,6 +54,13 @@ export const mainSlice = createSlice({
   },
 });
 
-export const {loadState, saveState, setTheme, addTodo, checkTodo, deleteTodo} =
-  mainSlice.actions;
+export const {
+  loadState,
+  saveState,
+  setTheme,
+  addTodo,
+  checkTodo,
+  changeTodo,
+  deleteTodo,
+} = mainSlice.actions;
 export default mainSlice.reducer;

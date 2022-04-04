@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const StyledTodoList = styled.div`
   width: 30%;
   padding-right: 10px;
-  background-color: ${({theme}) => theme.colors.background};
 
   h1 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -12,11 +11,15 @@ const StyledTodoList = styled.div`
     margin-bottom: 10px;
   }
 
-  .todo-form {
+  .todo-list {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  .input-wrapper {
+  .todo-form {
+    display: flex;
   }
 
   .todo-form__input {
@@ -28,7 +31,6 @@ const StyledTodoList = styled.div`
     font-family: ${({theme}) => theme.font.family};
     color: ${({theme}) => theme.colors.font};
     border: 2px solid;
-    border-color: ${({theme}) => theme.colors.primary};
     border-radius: 3px;
     background-color: transparent;
     outline: none;
@@ -39,17 +41,42 @@ const StyledTodoList = styled.div`
   }
 
   .todo-list__inner {
+    width: 350px;
     padding: 10px;
     list-style: none;
   }
 
+  .todo-title {
+    word-break: break-word;
+  }
+
   .todo-list__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 5px;
-    padding: 5px;
-    background-color: ${({theme}) => theme.colors.blur};
+    padding: 5px 10px;
     border: 2px solid;
-    border-color: ${({theme}) => theme.colors.primary};
     border-radius: 3px;
+  }
+
+  .todo-control {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox {
+    border-color: ${({theme}) => theme.colors.primary};
+    border-radius: 5px !important;
+  }
+
+  .checkbox-selected {
+    background-color: ${({theme}) => theme.colors.primary};
+    border-radius: 3px !important;
+  }
+
+  .fa-trash-can {
+    color: red;
   }
 `;
 

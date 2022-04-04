@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from 'store/hooks';
 import moment from 'moment';
 import RCalendar from 'react-calendar';
@@ -10,6 +10,7 @@ import {RootState} from 'store/store';
 import {setTheme} from 'store/stores/main/mainSlice';
 
 const Calendar = () => {
+  const [date, setDate] = useState(new Date());
   const dispatch = useAppDispatch();
   const {theme, todos} = useAppSelector(({main}: RootState) => ({
     theme: main.theme,
@@ -18,34 +19,34 @@ const Calendar = () => {
 
   const renderBadges = () => {
     const tiles = document.querySelectorAll('.react-calendar__tile');
-    todos.forEach((todo) => {
-      const todoDate = moment(todo.date).format('DD MMMM YYYY');
-      const sameDayTodos = todos.filter((sameTodo) =>
-        moment(sameTodo.date).format('DD MMMM YYYY'),
+
+    tiles.forEach((tile) => {
+      const dateLabel = tile.children[0]?.getAttribute('aria-label');
+      const dayTodos = todos.filter(
+        (todo) => moment(todo.date).format('DD MMMM YYYY') === dateLabel,
       );
 
-      tiles.forEach((item) => {
-        if (item.children[0].getAttribute('aria-label') === todoDate) {
-          if (item.children.length < 2) {
-            const badge = document.createElement('div');
-            const badgeInner = document.createElement('span');
-            badge.classList.add('badge');
-            badgeInner.classList.add('badge-inner');
-            badgeInner.innerHTML = sameDayTodos.length.toString();
-            badge.appendChild(badgeInner);
-            item.appendChild(badge);
-          } else {
-            item.children[1].innerHTML = sameDayTodos.length.toString();
-          }
+      if (dayTodos.length !== 0) {
+        if (tile.children.length < 2) {
+          const badge = document.createElement('div');
+          const badgeInner = document.createElement('span');
+          badge.classList.add('badge');
+          badgeInner.classList.add('badge-inner');
+          badgeInner.innerHTML = dayTodos.length.toString();
+          badge.appendChild(badgeInner);
+          tile.appendChild(badge);
+        } else {
+          tile.children[1].innerHTML = dayTodos.length.toString();
         }
-      });
+      } else {
+        tile.children[1]?.remove();
+      }
     });
   };
 
   useEffect(() => {
     renderBadges();
-    console.log(123);
-  }, [todos]);
+  }, [todos, date]);
 
   const handleToggleTheme = () => {
     switch (theme) {
@@ -81,7 +82,16 @@ const Calendar = () => {
         events={todos}
         dateClick={handleDateClick}
       /> */}
-      <RCalendar locale="en-GB" onActiveStartDateChange={renderBadges} />
+      <RCalendar
+        view="month"
+        locale="en-GB"
+        activeStartDate={date}
+        // onActiveStartDateChange={}
+        onDrillUp={() => setDate(new Date())}
+        onActiveStartDateChange={({activeStartDate}) =>
+          setDate(activeStartDate)
+        }
+      />
 
       <Button onClick={handleToggleTheme} scale={1}>
         toggle theme
