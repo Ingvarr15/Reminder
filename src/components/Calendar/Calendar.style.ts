@@ -4,9 +4,6 @@ const StyledCalendar = styled.div`
   width: 35%;
   padding-left: 10px;
 
-  .react-calendar {
-  }
-
   .react-calendar__navigation__prev2-button,
   .react-calendar__navigation__next2-button {
     display: none;
@@ -42,9 +39,9 @@ const StyledCalendar = styled.div`
     border: 1px solid;
   }
 
-  .react-calendar__tile--active {
+  /* .react-calendar__tile--active {
     background-color: ${({theme}) => theme.colors.blur} !important;
-  }
+  } */
 
   .react-calendar__tile {
     height: 50px;
@@ -85,6 +82,10 @@ const StyledCalendar = styled.div`
   .badge-inner {
     margin-top: 2px;
     margin-left: 1px;
+  }
+
+  .selected-day {
+    background-color: ${({theme}) => theme.colors.blur} !important;
   }
 `;
 

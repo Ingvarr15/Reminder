@@ -1,52 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from 'store/hooks';
-import moment from 'moment';
 import RCalendar from 'react-calendar';
+import OutsideClickHandler from 'react-outside-click-handler';
+import {useTheme} from 'styled-components';
 
 import Button from 'ui/Button';
+import DailyView from './components/DailyView';
 
+import {renderBadges, selectDay} from './Calendar.utils';
 import StyledCalendar from './Calendar.style';
 import {RootState} from 'store/store';
 import {setTheme} from 'store/stores/main/mainSlice';
+import moment from 'moment';
 
-const Calendar = ({selectDate}) => {
+const Calendar = () => {
   const [date, setDate] = useState(new Date());
+  const [dailyShown, setDailyShown] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [todayTodos, setTodayTodos] = useState([]);
   const dispatch = useAppDispatch();
+  const currentTheme: any = useTheme();
   const {theme, todos} = useAppSelector(({main}: RootState) => ({
     theme: main.theme,
     todos: main.todos,
   }));
 
-  const renderBadges = () => {
-    const tiles = document.querySelectorAll('.react-calendar__tile');
-
-    tiles.forEach((tile) => {
-      const dateLabel = tile.children[0]?.getAttribute('aria-label');
-      const dayTodos = todos.filter(
-        (todo) => moment(todo.date).format('DD MMMM YYYY') === dateLabel,
-      );
-
-      if (dayTodos.length !== 0) {
-        if (tile.children.length < 2) {
-          const badge = document.createElement('div');
-          const badgeInner = document.createElement('span');
-          badge.classList.add('badge');
-          badgeInner.classList.add('badge-inner');
-          badgeInner.innerHTML = dayTodos.length.toString();
-          badge.appendChild(badgeInner);
-          tile.appendChild(badge);
-        } else {
-          tile.children[1].innerHTML = dayTodos.length.toString();
-        }
-      } else {
-        tile.children[1]?.remove();
-      }
-    });
-  };
+  useEffect(() => {
+    renderBadges(todos);
+  }, [todos, date]);
 
   useEffect(() => {
-    renderBadges();
-  }, [todos, date]);
+    setTodayTodos(
+      todos.filter(
+        (todo) =>
+          moment(todo.date).format('D MMMM YYYY') ===
+          moment(selected).format('D MMMM YYYY'),
+      ),
+    );
+  }, [todos, selected]);
 
   const handleToggleTheme = () => {
     switch (theme) {
@@ -64,20 +55,34 @@ const Calendar = ({selectDate}) => {
 
   return (
     <StyledCalendar>
-      <RCalendar
-        view="month"
-        locale="en-GB"
-        activeStartDate={date}
-        onClickDay={(value) => selectDate(moment(value).format('DD MMMM YYYY'))}
-        onDrillUp={() => setDate(new Date())}
-        onActiveStartDateChange={({activeStartDate}) =>
-          setDate(activeStartDate)
-        }
-      />
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          setDailyShown(false);
+          selectDay(currentTheme, null);
+          setTodayTodos([]);
+        }}
+      >
+        <RCalendar
+          view="month"
+          locale="en-GB"
+          activeStartDate={date}
+          onClickDay={(value) => {
+            setDailyShown(true);
+            selectDay(currentTheme, value);
+          }}
+          onDrillUp={() => setDate(new Date())}
+          onActiveStartDateChange={({activeStartDate}) =>
+            setDate(activeStartDate)
+          }
+          onChange={(value: Date) => setSelected(value)}
+        />
 
-      <Button onClick={handleToggleTheme} scale={1}>
-        toggle theme
-      </Button>
+        <DailyView dailyShown={dailyShown} todayTodos={todayTodos} />
+
+        <Button onClick={handleToggleTheme} scale={1}>
+          toggle theme
+        </Button>
+      </OutsideClickHandler>
     </StyledCalendar>
   );
 };

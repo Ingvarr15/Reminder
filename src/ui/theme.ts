@@ -1,7 +1,6 @@
 import darken from 'polished/lib/color/darken';
-// import lighten from 'polished/lib/color/lighten';
 
-type Ttheme = {
+export interface Ttheme {
   font: {
     family: string;
     size: string;
@@ -14,7 +13,7 @@ type Ttheme = {
     font: string;
     darken: string;
   };
-};
+}
 
 interface Tthemes {
   [key: string]: Ttheme;
