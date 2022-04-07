@@ -89,6 +89,16 @@ const StyledCalendar = styled.div`
   }
 
   .daily-container {
+    margin: 10px 0 0 5px;
+  }
+
+  .todos-nothing {
+    font-style: italic;
+    opacity: 0.4;
+  }
+
+  .completed-todo {
+    text-decoration: line-through;
   }
 `;
 

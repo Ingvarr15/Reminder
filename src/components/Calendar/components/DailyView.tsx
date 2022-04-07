@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import {TTodo} from 'store/stores/main/types';
 
@@ -7,13 +8,18 @@ const DailyView = ({shownDate, todayTodos}) => {
     <div className="daily-container">
       For {shownDate}:
       {todayTodos.length === 0 ? (
-        <div>
+        <div className="todos-nothing">
           {'<'}Nothing...{'>'}
         </div>
       ) : (
         <ul>
           {todayTodos.map((todo: TTodo) => (
-            <li key={todo.id}>{todo.title}</li>
+            <li
+              className={classnames({'completed-todo': todo.done})}
+              key={todo.id}
+            >
+              {todo.title}
+            </li>
           ))}
         </ul>
       )}

@@ -21,10 +21,46 @@ const StyledTodoList = styled.div`
     justify-content: center;
   }
 
+  .button-new {
+    padding-left: 10px;
+    align-self: flex-start;
+  }
+
   .todo-form {
+    width: 90%;
+    position: relative;
+    padding: 25px 15px 15px;
+    border: 2px solid;
+    border-color: ${({theme}) => theme.colors.font};
+    border-radius: 3px;
+  }
+
+  .todo-form-input {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+
+  .todo-options {
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .todo-option__item {
+    margin-right: 5px;
+  }
+
+  .close-form {
+    position: absolute;
+    top: 0;
+    right: 5px;
+  }
+
+  .fa-xmark {
+    font-size: 22px;
+    &:hover {
+      color: ${({theme}) => theme.colors.primary};
+    }
   }
 
   .view-state {
@@ -125,7 +161,7 @@ const StyledTodoList = styled.div`
   }
 
   .fa-solid {
-    pointer-events: none;
+    cursor: pointer;
   }
 
   .control-button {

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Button from 'ui/Button';
 import Checkbox from 'react-checkbox-component';
 
+import TodoForm from './components/TodoForm';
+
 import StyledTodoList from './TodoList.style';
 import {
   addTodo,
@@ -12,6 +14,7 @@ import {
 import {useAppDispatch, useAppSelector} from 'store/hooks';
 
 const TodoList = () => {
+  const [createNew, setCreateNew] = useState(false);
   const [value, setValue] = useState('');
   const [edit, setEdit] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -52,17 +55,22 @@ const TodoList = () => {
   return (
     <StyledTodoList>
       <h1>ToDo List</h1>
-      <form className="todo-form">
-        <input
-          className="todo-form__input"
-          type="text"
+      {createNew ? (
+        <TodoForm
           value={value}
-          onChange={(e) => setValue(e.currentTarget.value)}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          setCreateNew={setCreateNew}
+          edit={edit}
         />
-        <Button scale={1} onClick={handleSubmit} disabled={edit}>
-          Add
-        </Button>
-      </form>
+      ) : (
+        <div className="button-new">
+          <Button width={100} onClick={() => setCreateNew(true)}>
+            + New
+          </Button>
+        </div>
+      )}
+
       <div className="todo-list">
         <ul className="todo-list__inner">
           {todos.map((todo) => (
@@ -78,7 +86,7 @@ const TodoList = () => {
                   />
                   <div className="todo-control">
                     <button className="control-button" onClick={handleSubmit}>
-                      <i className="fa-solid fa-check"></i>
+                      <i className="fa-regular fa-check"></i>
                     </button>
                     <button
                       className="control-button"
@@ -87,7 +95,7 @@ const TodoList = () => {
                         setEdit(null);
                       }}
                     >
-                      <i className="fa-solid fa-xmark"></i>
+                      <i className="fa-regular fa-xmark"></i>
                     </button>
                   </div>
                 </div>

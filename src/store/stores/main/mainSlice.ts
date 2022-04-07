@@ -4,11 +4,15 @@ import {TTodo} from './types';
 interface IMain {
   theme: string;
   todos: TTodo[];
+  newTodoWithDate: boolean;
+  newTodoWithTime: boolean;
 }
 
 const initialState: IMain = {
   theme: 'orangeGreen',
   todos: [],
+  newTodoWithDate: false,
+  newTodoWithTime: false,
 };
 
 export const mainSlice = createSlice({
@@ -57,6 +61,12 @@ export const mainSlice = createSlice({
       const filteredTodos = state.todos.filter((todo) => todo.id !== payload);
       state.todos = filteredTodos;
     },
+    includeDate: (state, {payload}: PayloadAction<boolean>) => {
+      state.newTodoWithDate = payload;
+    },
+    includeTime: (state, {payload}: PayloadAction<boolean>) => {
+      state.newTodoWithTime = payload;
+    },
   },
 });
 
@@ -68,5 +78,7 @@ export const {
   checkTodo,
   editTodo,
   deleteTodo,
+  includeDate,
+  includeTime,
 } = mainSlice.actions;
 export default mainSlice.reducer;

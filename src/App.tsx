@@ -11,7 +11,10 @@ import {loadState, saveState} from 'store/stores/main/mainSlice';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state);
+  const {todos, theme} = useAppSelector(({main}) => ({
+    todos: main.todos,
+    theme: main.theme,
+  }));
 
   useEffect(() => {
     dispatch(loadState());
@@ -19,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(saveState());
-  }, [state]);
+  }, [todos, theme]);
 
   return (
     <StyledThemeProvider>
