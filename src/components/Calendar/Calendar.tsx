@@ -4,20 +4,21 @@ import RCalendar from 'react-calendar';
 import OutsideClickHandler from 'react-outside-click-handler';
 import {useTheme} from 'styled-components';
 
-import Button from 'ui/Button';
+// import Button from 'ui/Button';
 import DailyView from './components/DailyView';
 
-import {renderBadges, selectDay} from './Calendar.utils';
+import {getDayTitle, renderBadges, selectDay} from './Calendar.utils';
 import StyledCalendar from './Calendar.style';
 import {RootState} from 'store/store';
 import {setTheme} from 'store/stores/main/mainSlice';
 import moment from 'moment';
+import {DAY_FORMAT} from 'constantsList';
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
-  const [dailyShown, setDailyShown] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(new Date());
   const [todayTodos, setTodayTodos] = useState([]);
+  const [shownDate, setShownDate] = useState('');
   const dispatch = useAppDispatch();
   const currentTheme: any = useTheme();
   const {theme, todos} = useAppSelector(({main}: RootState) => ({
@@ -30,13 +31,16 @@ const Calendar = () => {
   }, [todos, date]);
 
   useEffect(() => {
-    setTodayTodos(
-      todos.filter(
-        (todo) =>
-          moment(todo.date).format('D MMMM YYYY') ===
-          moment(selected).format('D MMMM YYYY'),
-      ),
+    setShownDate(getDayTitle(selected));
+  }, [selected]);
+
+  useEffect(() => {
+    const filteredTodos = todos.filter(
+      (todo) =>
+        moment(todo.date).format(DAY_FORMAT) ===
+        moment(selected).format(DAY_FORMAT),
     );
+    setTodayTodos(filteredTodos);
   }, [todos, selected]);
 
   const handleToggleTheme = () => {
@@ -52,36 +56,38 @@ const Calendar = () => {
       //   break;
     }
   };
+  handleToggleTheme;
 
   return (
     <StyledCalendar>
       <OutsideClickHandler
         onOutsideClick={() => {
-          setDailyShown(false);
           selectDay(currentTheme, null);
-          setTodayTodos([]);
+          setSelected(new Date());
         }}
       >
         <RCalendar
           view="month"
           locale="en-GB"
           activeStartDate={date}
-          onClickDay={(value) => {
-            setDailyShown(true);
+          onClickDay={(value: Date) => {
             selectDay(currentTheme, value);
           }}
-          onDrillUp={() => setDate(new Date())}
+          onDrillUp={() => {
+            setDate(new Date());
+            setSelected(new Date());
+          }}
           onActiveStartDateChange={({activeStartDate}) =>
             setDate(activeStartDate)
           }
           onChange={(value: Date) => setSelected(value)}
         />
 
-        <DailyView dailyShown={dailyShown} todayTodos={todayTodos} />
+        <DailyView shownDate={shownDate} todayTodos={todayTodos} />
 
-        <Button onClick={handleToggleTheme} scale={1}>
+        {/* <Button onClick={handleToggleTheme} scale={1}>
           toggle theme
-        </Button>
+        </Button> */}
       </OutsideClickHandler>
     </StyledCalendar>
   );

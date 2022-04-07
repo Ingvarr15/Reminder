@@ -87,6 +87,9 @@ const StyledCalendar = styled.div`
   .selected-day {
     background-color: ${({theme}) => theme.colors.blur} !important;
   }
+
+  .daily-container {
+  }
 `;
 
 export default StyledCalendar;

@@ -1,5 +1,6 @@
 import moment from 'moment';
 
+import {DAY_FORMAT} from 'constantsList';
 import {TTodo} from 'store/stores/main/types';
 
 export const renderBadges = (todos: Array<TTodo>) => {
@@ -8,7 +9,7 @@ export const renderBadges = (todos: Array<TTodo>) => {
   tiles.forEach((tile) => {
     const dateLabel = tile.children[0]?.getAttribute('aria-label');
     const dayTodos = todos.filter(
-      (todo) => moment(todo.date).format('D MMMM YYYY') === dateLabel,
+      (todo) => moment(todo.date).format(DAY_FORMAT) === dateLabel,
     );
 
     if (dayTodos.length !== 0) {
@@ -30,7 +31,7 @@ export const renderBadges = (todos: Array<TTodo>) => {
 };
 
 export const selectDay = (currentTheme: any, value: Date | null) => {
-  const formattedValue = moment(value).format('D MMMM YYYY');
+  const formattedValue = moment(value).format(DAY_FORMAT);
   const tiles: NodeListOf<HTMLElement> = document.querySelectorAll(
     '.react-calendar__tile',
   );
@@ -43,5 +44,21 @@ export const selectDay = (currentTheme: any, value: Date | null) => {
         tile.style.background = currentTheme.colors.blur;
       }
     });
+  }
+};
+
+export const getDayTitle = (selected: Date) => {
+  if (
+    moment(selected).format(DAY_FORMAT) ===
+    moment(new Date()).format(DAY_FORMAT)
+  ) {
+    return 'today';
+  } else if (
+    moment(selected).format(DAY_FORMAT) ===
+    moment(new Date()).add(1, 'day').format(DAY_FORMAT)
+  ) {
+    return 'tomorrow';
+  } else {
+    return moment(selected).format(DAY_FORMAT);
   }
 };
