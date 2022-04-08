@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
+
 import main from './stores/main/mainSlice';
+import form from './stores/form/formSlice';
 
 const store = configureStore({
-  reducer: {main},
+  reducer: {main, form},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({serializableCheck: false}),
 });

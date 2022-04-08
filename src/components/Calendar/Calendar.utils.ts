@@ -8,9 +8,7 @@ export const renderBadges = (todos: Array<TTodo>) => {
 
   tiles.forEach((tile) => {
     const dateLabel = tile.children[0]?.getAttribute('aria-label');
-    const dayTodos = todos.filter(
-      (todo) => moment(todo.date).format(DAY_FORMAT) === dateLabel,
-    );
+    const dayTodos = todos.filter((todo) => todo.date === dateLabel);
 
     if (dayTodos.length !== 0) {
       if (tile.children.length < 2) {
@@ -30,18 +28,31 @@ export const renderBadges = (todos: Array<TTodo>) => {
   });
 };
 
-export const selectDay = (currentTheme: any, value: Date | null) => {
+export const selectDay = (
+  currentTheme: any,
+  value: Date | null,
+  newTodoWithDate: boolean,
+) => {
   const formattedValue = moment(value).format(DAY_FORMAT);
   const tiles: NodeListOf<HTMLElement> = document.querySelectorAll(
     '.react-calendar__tile',
   );
-  tiles.forEach((tile) => (tile.style.background = 'transparent'));
+  tiles.forEach((tile) => {
+    tile.style.background = 'transparent';
+    tile.style.borderColor = currentTheme.colors.font;
+    tile.children[0].classList.remove('selected-abbr');
+  });
 
   if (value) {
     tiles.forEach((tile) => {
       const dateLabel = tile.children[0]?.getAttribute('aria-label');
       if (formattedValue === dateLabel) {
-        tile.style.background = currentTheme.colors.blur;
+        if (newTodoWithDate) {
+          tile.style.borderColor = currentTheme.colors.primary;
+          tile.children[0].classList.add('selected-abbr');
+        } else {
+          tile.style.background = currentTheme.colors.blur;
+        }
       }
     });
   }

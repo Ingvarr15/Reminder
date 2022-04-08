@@ -5,17 +5,11 @@ import Checkbox from 'react-checkbox-component';
 import TodoForm from './components/TodoForm';
 
 import StyledTodoList from './TodoList.style';
-import {
-  addTodo,
-  checkTodo,
-  deleteTodo,
-  editTodo,
-} from 'store/stores/main/mainSlice';
+import {checkTodo, deleteTodo, editTodo} from 'store/stores/main/mainSlice';
 import {useAppDispatch, useAppSelector} from 'store/hooks';
 
 const TodoList = () => {
   const [createNew, setCreateNew] = useState(false);
-  const [value, setValue] = useState('');
   const [edit, setEdit] = useState(null);
   const [editValue, setEditValue] = useState('');
   const dispatch = useAppDispatch();
@@ -23,46 +17,22 @@ const TodoList = () => {
     todos: main.todos,
   }));
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmitEdit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const trimedValue = edit ? editValue.trim() : value.trim();
-
-    if (edit) {
-      if (trimedValue === '') {
-        return;
-      }
-
-      dispatch(editTodo({id: edit, title: editValue}));
-      setEdit(null);
-    } else {
-      if (trimedValue === '') {
-        setValue('');
-        return;
-      }
-
-      const newTodo = {
-        title: trimedValue,
-        done: false,
-        date: new Date('2022-04-23T13:07:38.083Z'),
-        id: Math.random().toString().substring(2, 7),
-      };
-
-      dispatch(addTodo(newTodo));
-      setValue('');
+    const trimedValue = editValue.trim();
+    if (trimedValue === '') {
+      return;
     }
+
+    dispatch(editTodo({id: edit, title: editValue}));
+    setEdit(null);
   };
 
   return (
     <StyledTodoList>
       <h1>ToDo List</h1>
       {createNew ? (
-        <TodoForm
-          value={value}
-          setValue={setValue}
-          handleSubmit={handleSubmit}
-          setCreateNew={setCreateNew}
-          edit={edit}
-        />
+        <TodoForm setCreateNew={setCreateNew} edit={edit} />
       ) : (
         <div className="button-new">
           <Button width={100} onClick={() => setCreateNew(true)}>
@@ -85,7 +55,10 @@ const TodoList = () => {
                     onChange={(e) => setEditValue(e.currentTarget.value)}
                   />
                   <div className="todo-control">
-                    <button className="control-button" onClick={handleSubmit}>
+                    <button
+                      className="control-button"
+                      onClick={handleSubmitEdit}
+                    >
                       <i className="fa-regular fa-check"></i>
                     </button>
                     <button

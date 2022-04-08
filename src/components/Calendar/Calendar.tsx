@@ -13,6 +13,7 @@ import {RootState} from 'store/store';
 import {setTheme} from 'store/stores/main/mainSlice';
 import moment from 'moment';
 import {DAY_FORMAT} from 'constantsList';
+import {selectDate} from 'store/stores/form/formSlice';
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
@@ -21,10 +22,14 @@ const Calendar = () => {
   const [shownDate, setShownDate] = useState('');
   const dispatch = useAppDispatch();
   const currentTheme: any = useTheme();
-  const {theme, todos} = useAppSelector(({main}: RootState) => ({
-    theme: main.theme,
-    todos: main.todos,
-  }));
+  const {theme, todos, newTodoWithDate, selectedDate} = useAppSelector(
+    ({main, form}: RootState) => ({
+      theme: main.theme,
+      todos: main.todos,
+      newTodoWithDate: form.newTodoWithDate,
+      selectedDate: form.selectedDate,
+    }),
+  );
 
   useEffect(() => {
     renderBadges(todos);
@@ -36,9 +41,7 @@ const Calendar = () => {
 
   useEffect(() => {
     const filteredTodos = todos.filter(
-      (todo) =>
-        moment(todo.date).format(DAY_FORMAT) ===
-        moment(selected).format(DAY_FORMAT),
+      (todo) => todo.date === moment(selected).format(DAY_FORMAT),
     );
     setTodayTodos(filteredTodos);
   }, [todos, selected]);
@@ -58,11 +61,28 @@ const Calendar = () => {
   };
   handleToggleTheme;
 
+  const handleCkickDay = (value: Date) => {
+    selectDay(currentTheme, value, newTodoWithDate);
+    if (newTodoWithDate) {
+      dispatch(selectDate(moment(value).format(DAY_FORMAT)));
+    }
+  };
+
+  useEffect(() => {
+    if (!newTodoWithDate) {
+      selectDay(currentTheme, null, newTodoWithDate);
+    }
+  }, [newTodoWithDate]);
+
   return (
     <StyledCalendar>
       <OutsideClickHandler
         onOutsideClick={() => {
-          selectDay(currentTheme, null);
+          if (newTodoWithDate) {
+            selectDay(currentTheme, new Date(selectedDate), newTodoWithDate);
+          } else {
+            selectDay(currentTheme, null, newTodoWithDate);
+          }
           setSelected(new Date());
         }}
       >
@@ -70,9 +90,7 @@ const Calendar = () => {
           view="month"
           locale="en-GB"
           activeStartDate={date}
-          onClickDay={(value: Date) => {
-            selectDay(currentTheme, value);
-          }}
+          onClickDay={(value) => handleCkickDay(value)}
           onDrillUp={() => {
             setDate(new Date());
             setSelected(new Date());
@@ -82,8 +100,9 @@ const Calendar = () => {
           }
           onChange={(value: Date) => setSelected(value)}
         />
-
-        <DailyView shownDate={shownDate} todayTodos={todayTodos} />
+        {!newTodoWithDate && (
+          <DailyView shownDate={shownDate} todayTodos={todayTodos} />
+        )}
 
         {/* <Button onClick={handleToggleTheme} scale={1}>
           toggle theme

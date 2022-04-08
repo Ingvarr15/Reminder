@@ -100,6 +100,10 @@ const StyledCalendar = styled.div`
   .completed-todo {
     text-decoration: line-through;
   }
+
+  .selected-abbr {
+    color: ${({theme}) => theme.colors.primary};
+  }
 `;
 
 export default StyledCalendar;

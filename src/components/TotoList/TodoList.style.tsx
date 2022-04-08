@@ -29,7 +29,7 @@ const StyledTodoList = styled.div`
   .todo-form {
     width: 90%;
     position: relative;
-    padding: 25px 15px 15px;
+    padding: 25px 15px 10px;
     border: 2px solid;
     border-color: ${({theme}) => theme.colors.font};
     border-radius: 3px;
@@ -43,6 +43,7 @@ const StyledTodoList = styled.div`
 
   .todo-options {
     display: flex;
+    align-items: center;
     padding-top: 10px;
   }
 
@@ -180,6 +181,46 @@ const StyledTodoList = styled.div`
     &:active {
       background-color: ${({theme}) => theme.colors.darken};
     }
+  }
+
+  .react-time-picker__wrapper {
+    display: flex;
+    align-items: center;
+    border: 0;
+  }
+
+  .react-time-picker__inputGroup {
+    min-width: auto;
+    margin-right: 5px;
+  }
+
+  .react-time-picker__inputGroup__input {
+    min-width: 20px;
+    color: ${({theme}) => theme.colors.font};
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    border-bottom: 2px solid;
+    border-color: ${({theme}) => theme.colors.primary};
+    appearance: none;
+  }
+
+  .react-time-picker__inputGroup__leadingZero {
+    display: none;
+  }
+
+  .react-time-picker__inputGroup__input--hasLeadingZero {
+    margin-left: 0;
+    padding: 0px 1px;
+  }
+
+  .react-time-picker__button {
+    display: none;
+  }
+
+  .form-tip {
+    position: absolute;
+    right: 10px;
   }
 `;
 
