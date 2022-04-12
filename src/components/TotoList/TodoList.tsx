@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Button from 'ui/Button';
 import Checkbox from 'react-checkbox-component';
+import moment from 'moment';
 
 import TodoForm from './components/TodoForm';
 
@@ -59,7 +60,7 @@ const TodoList = () => {
                       className="control-button"
                       onClick={handleSubmitEdit}
                     >
-                      <i className="fa-regular fa-check"></i>
+                      <i className="fa-solid fa-check"></i>
                     </button>
                     <button
                       className="control-button"
@@ -68,13 +69,20 @@ const TodoList = () => {
                         setEdit(null);
                       }}
                     >
-                      <i className="fa-regular fa-xmark"></i>
+                      <i className="fa-solid fa-xmark"></i>
                     </button>
                   </div>
                 </div>
               ) : (
                 <div className="todo-item__inner">
-                  <div className="todo-title">{todo.title}</div>
+                  <div className="todo-title">
+                    <span className="todo-title">{todo.title} </span>
+                    <span className="todo-date">
+                      {todo.date &&
+                        moment(new Date(todo.date)).format('D MMMM')}
+                      {todo.time && ` in ${todo.time}`}
+                    </span>
+                  </div>
                   <div className="todo-control">
                     <Checkbox
                       onChange={() => dispatch(checkTodo(todo.id))}

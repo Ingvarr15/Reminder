@@ -35,6 +35,13 @@ const StyledTodoList = styled.div`
     border-radius: 3px;
   }
 
+  .close-btn {
+    font-size: 22px;
+    &:hover {
+      color: ${({theme}) => theme.colors.primary};
+    }
+  }
+
   .todo-form-input {
     width: 100%;
     display: flex;
@@ -55,13 +62,6 @@ const StyledTodoList = styled.div`
     position: absolute;
     top: 0;
     right: 5px;
-  }
-
-  .fa-xmark {
-    font-size: 22px;
-    &:hover {
-      color: ${({theme}) => theme.colors.primary};
-    }
   }
 
   .view-state {
@@ -221,6 +221,11 @@ const StyledTodoList = styled.div`
   .form-tip {
     position: absolute;
     right: 10px;
+  }
+
+  .todo-date {
+    font-size: ${({theme}) => parseInt(theme.font.size) * 0.7}px;
+    opacity: 0.7;
   }
 `;
 

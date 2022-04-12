@@ -82,7 +82,7 @@ const TodoForm = ({setCreateNew, edit}) => {
   return (
     <form className="todo-form">
       <div className="close-form" onClick={() => setCreateNew(false)}>
-        <i className="fa-solid fa-xmark"></i>
+        <i className="fa-solid fa-xmark close-btn"></i>
       </div>
       <div className="todo-form-input">
         <input
