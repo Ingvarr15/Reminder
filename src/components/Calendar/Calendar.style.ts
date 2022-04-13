@@ -29,6 +29,7 @@ const StyledCalendar = styled.div`
     border: 1px solid;
     border-radius: 3px;
     border-color: ${({theme}) => theme.colors.primary};
+    cursor: pointer;
 
     &:active {
       background-color: ${({theme}) => theme.colors.darken};
@@ -38,10 +39,6 @@ const StyledCalendar = styled.div`
   .react-calendar__month-view__days {
     border: 1px solid;
   }
-
-  /* .react-calendar__tile--active {
-    background-color: ${({theme}) => theme.colors.blur} !important;
-  } */
 
   .react-calendar__tile {
     height: 50px;
@@ -54,6 +51,11 @@ const StyledCalendar = styled.div`
     background-color: transparent;
     border: 1px solid;
     border-color: ${({theme}) => theme.colors.font};
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${({theme}) => theme.colors.blur} !important;
+    }
   }
 
   .react-calendar__tile--now abbr {
@@ -103,6 +105,10 @@ const StyledCalendar = styled.div`
 
   .selected-abbr {
     color: ${({theme}) => theme.colors.primary};
+  }
+
+  .daily-list {
+    padding-left: 20px;
   }
 `;
 

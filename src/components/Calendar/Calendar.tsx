@@ -26,8 +26,8 @@ const Calendar = () => {
     ({main, form}: RootState) => ({
       theme: main.theme,
       todos: main.todos,
-      newTodoWithDate: form.newTodoWithDate,
-      selectedDate: form.selectedDate,
+      newTodoWithDate: form.todoForm.newTodoWithDate,
+      selectedDate: form.todoForm.selectedDate,
     }),
   );
 

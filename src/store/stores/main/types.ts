@@ -5,3 +5,10 @@ export type TTodo = {
   date: string | null;
   time: string | null;
 };
+
+export type TLink = {
+  id: string;
+  title: string;
+  img: string;
+  url: string;
+};

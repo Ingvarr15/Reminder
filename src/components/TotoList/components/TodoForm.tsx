@@ -22,11 +22,11 @@ const TodoForm = ({setCreateNew, edit}) => {
     selectedDate,
     selectedTime,
   } = useAppSelector(({form}) => ({
-    inputValue: form.inputValue,
-    newTodoWithDate: form.newTodoWithDate,
-    newTodoWithTime: form.newTodoWithTime,
-    selectedDate: form.selectedDate,
-    selectedTime: form.selectedTime,
+    inputValue: form.todoForm.inputValue,
+    newTodoWithDate: form.todoForm.newTodoWithDate,
+    newTodoWithTime: form.todoForm.newTodoWithTime,
+    selectedDate: form.todoForm.selectedDate,
+    selectedTime: form.todoForm.selectedTime,
   }));
 
   const toggleIncludeDate = (e: SyntheticEvent) => {

@@ -1,14 +1,16 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TTodo} from './types';
+import {TTodo, TLink} from './types';
 
 interface IMain {
   theme: string;
   todos: TTodo[];
+  links: TLink[];
 }
 
 const initialState: IMain = {
   theme: 'orangeGreen',
   todos: [],
+  links: [],
 };
 
 export const mainSlice = createSlice({
@@ -22,6 +24,7 @@ export const mainSlice = createSlice({
         );
         state.theme = loadedState.theme || initialState.theme;
         state.todos = loadedState.todos || initialState.todos;
+        state.links = loadedState.links || initialState.links;
       }
     },
     saveState: (state) => {
@@ -30,6 +33,7 @@ export const mainSlice = createSlice({
         JSON.stringify({
           theme: state.theme,
           todos: state.todos,
+          links: state.links,
         }),
       );
     },
@@ -57,6 +61,9 @@ export const mainSlice = createSlice({
       const filteredTodos = state.todos.filter((todo) => todo.id !== payload);
       state.todos = filteredTodos;
     },
+    addLink: (state, {payload}: PayloadAction<TLink>) => {
+      state.links.push(payload);
+    },
   },
 });
 
@@ -68,5 +75,6 @@ export const {
   checkTodo,
   editTodo,
   deleteTodo,
+  addLink,
 } = mainSlice.actions;
 export default mainSlice.reducer;
