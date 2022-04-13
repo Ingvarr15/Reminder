@@ -6,12 +6,15 @@ const MainStyles = styled.div`
   background: ${({theme}) => theme.colors.background};
   font-family: ${({theme}) => theme.font.family};
   font-size: ${({theme}) => theme.font.size};
-  color: ${({theme}) => theme.font.color};
-
-  button {
-    font-family: ${({theme}) => theme.font.family};
-    font-size: ${({theme}) => theme.font.size};
+  color: ${({theme}) => theme.colors.font};
+  button:disabled {
+    background: ${({theme}) => theme.colors.blur};
   }
+  * {
+    transition: all 0.2s ease;
+  }
+
+  transition: all 0.2s ease;
 `;
 
 export default MainStyles;
