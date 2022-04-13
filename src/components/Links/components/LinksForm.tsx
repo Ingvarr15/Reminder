@@ -40,10 +40,10 @@ const LinksForm = ({setCreateNew}) => {
       id: Math.random().toString().substring(2, 7),
       title: title.trim(),
       img: getIcon(url),
-      url: url.trim(),
+      url: 'www.' + url.trim(),
     };
 
-    if (newLink.title === '' || newLink.url === '') {
+    if (title.trim() === '' || url.trim() === '') {
       return;
     } else {
       dispatch(addLink(newLink));

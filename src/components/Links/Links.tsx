@@ -11,7 +11,14 @@ const Links = () => {
 
   return (
     <StyledLinks>
-      {createNew ? <LinksForm setCreateNew={setCreateNew} /> : <LinksList />}
+      {createNew ? (
+        <LinksForm setCreateNew={setCreateNew} />
+      ) : (
+        <>
+          <Button onClick={() => setCreateNew(!createNew)}>+</Button>
+          <LinksList />
+        </>
+      )}
     </StyledLinks>
   );
 };
