@@ -1,15 +1,15 @@
 import React, {SyntheticEvent, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from 'store/hooks';
-import TimePicker from 'react-time-picker';
 
 import Button from 'ui/Button';
+import TodoFormOptions from './TodoFormOptions';
 
 import {
   setInputValue,
   includeDate,
   includeTime,
   selectDate,
-  selectTime,
+  resetTodoForm,
 } from 'store/stores/form/formSlice';
 import {addTodo} from 'store/stores/main/mainSlice';
 
@@ -60,16 +60,12 @@ const TodoForm = ({setCreateNew, edit}) => {
     };
 
     dispatch(addTodo(newTodo));
-    dispatch(selectDate(null));
-    dispatch(includeDate(false));
-    dispatch(includeTime(false));
-    dispatch(setInputValue(''));
+    dispatch(resetTodoForm());
   };
 
   useEffect(() => {
     return () => {
-      dispatch(includeDate(false));
-      dispatch(includeTime(false));
+      dispatch(resetTodoForm());
     };
   }, []);
 
@@ -95,40 +91,10 @@ const TodoForm = ({setCreateNew, edit}) => {
           Add
         </Button>
       </div>
-      <div className="todo-options">
-        <Button className="todo-option__item" onClick={toggleIncludeDate}>
-          <i className="fa-regular fa-calendar"></i>
-        </Button>
-        <Button
-          className="todo-option__item"
-          onClick={toggleIncludeTime}
-          disabled={!newTodoWithDate}
-        >
-          <i className="fa-regular fa-clock"></i>
-        </Button>
-        {newTodoWithTime && (
-          <TimePicker
-            onChange={(value) => {
-              if (value) {
-                dispatch(selectTime(value.toString()));
-              } else {
-                dispatch(selectTime(null));
-              }
-            }}
-            hourPlaceholder=""
-            minutePlaceholder=""
-            disableClock
-            value={selectedTime}
-          />
-        )}
-        <div className="form-tip">
-          {!newTodoWithDate
-            ? ''
-            : newTodoWithDate && !selectedDate
-            ? 'Select date on the calendar ->'
-            : selectedDate}
-        </div>
-      </div>
+      <TodoFormOptions
+        toggleIncludeDate={toggleIncludeDate}
+        toggleIncludeTime={toggleIncludeTime}
+      />
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TTodo, TLink} from './types';
+import store from 'store/store';
 
 interface IMain {
   theme: string;
@@ -64,6 +65,19 @@ export const mainSlice = createSlice({
     addLink: (state, {payload}: PayloadAction<TLink>) => {
       state.links.push(payload);
     },
+    deleteLink: (state, {payload}: PayloadAction<string>) => {
+      const filteredLinks = state.links.filter((link) => link.id !== payload);
+      state.links = filteredLinks;
+    },
+    replaceLinks: (state, {payload}: PayloadAction<TLink[]>) => {
+      state.links = payload;
+    },
+    editLink: (state, {payload}: PayloadAction<TLink>) => {
+      const newLinks = state.links.map((link) =>
+        link.id === payload.id ? (link = payload) : {...link},
+      );
+      state.links = newLinks;
+    },
   },
 });
 
@@ -76,5 +90,8 @@ export const {
   editTodo,
   deleteTodo,
   addLink,
+  deleteLink,
+  replaceLinks,
+  editLink,
 } = mainSlice.actions;
 export default mainSlice.reducer;

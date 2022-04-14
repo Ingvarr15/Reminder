@@ -60,8 +60,9 @@ const StyledCalendar = styled.div`
 
   .react-calendar__tile--now abbr {
     margin-left: -4px;
-    padding: 0 4px;
-    background-color: ${({theme}) => theme.colors.primary};
+    padding: 0 3px 0 2px;
+    background-color: ${({theme}) => theme.colors.font};
+    color: ${({theme}) => theme.colors.primary};
     border-radius: 3px;
   }
 

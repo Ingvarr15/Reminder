@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {TLink} from '../main/types';
 
 interface IMain {
   todoForm: {
@@ -7,11 +8,6 @@ interface IMain {
     newTodoWithTime: boolean;
     selectedDate: string;
     selectedTime: string;
-  };
-  linkForm: {
-    title: string;
-    img: string;
-    url: string;
   };
 }
 
@@ -23,14 +19,9 @@ const initialState: IMain = {
     selectedDate: null,
     selectedTime: null,
   },
-  linkForm: {
-    title: '',
-    img: '',
-    url: '',
-  },
 };
 
-export const mainSlice = createSlice({
+export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
@@ -49,19 +40,8 @@ export const mainSlice = createSlice({
     selectTime: (state, {payload}: PayloadAction<string>) => {
       state.todoForm.selectedTime = payload;
     },
-    setLinkTitle: (state, {payload}: PayloadAction<string>) => {
-      state.linkForm.title = payload;
-    },
-    setLinkImg: (state, {payload}: PayloadAction<string>) => {
-      state.linkForm.img = payload;
-    },
-    setLinkUrl: (state, {payload}: PayloadAction<string>) => {
-      state.linkForm.url = payload;
-    },
-    resetForm: (state) => {
-      state.linkForm.title = '';
-      state.linkForm.img = '';
-      state.linkForm.url = '';
+    resetTodoForm: (state) => {
+      state.todoForm = initialState.todoForm;
     },
   },
 });
@@ -72,9 +52,6 @@ export const {
   includeTime,
   selectDate,
   selectTime,
-  setLinkTitle,
-  setLinkImg,
-  setLinkUrl,
-  resetForm,
-} = mainSlice.actions;
-export default mainSlice.reducer;
+  resetTodoForm,
+} = formSlice.actions;
+export default formSlice.reducer;
