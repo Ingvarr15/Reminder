@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import Links from 'components/Links/Links';
+import LeftSide from 'components/LeftSide/LeftSide';
 import TodoList from 'components/TotoList/TodoList';
 import Calendar from './components/Calendar/Calendar';
 
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <StyledThemeProvider>
       <AppContainer>
-        <Links />
+        <LeftSide />
         <TodoList />
         <Calendar />
       </AppContainer>

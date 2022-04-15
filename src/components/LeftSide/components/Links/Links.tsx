@@ -1,8 +1,8 @@
 import React, {createContext, useReducer} from 'react';
 
 import Button from 'ui/Button';
-import LinksForm from './components/LinksForm';
-import LinksList from './components/LinksList';
+import LinksForm from './LinksForm';
+import LinksList from './LinksList';
 
 import StyledLinks from './Links.style';
 import {setOpenForm} from './localStore/Links.actions';
@@ -37,8 +37,6 @@ const Links = () => {
               >
                 +
               </Button>
-
-              <div className="links-header__title">Links</div>
             </div>
 
             <LinksList />

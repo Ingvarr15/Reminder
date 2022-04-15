@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 const StyledLinks = styled.div`
-  width: 30%;
-
   .links-header {
     position: relative;
     display: flex;
     justify-content: center;
     padding-left: 35px;
-    margin-bottom: 10px;
+    margin-bottom: 10px 0;
   }
 
   .links-header__btn {
@@ -16,10 +14,6 @@ const StyledLinks = styled.div`
     top: 0;
     left: 0;
     z-index: 1000;
-  }
-
-  .links-header__title {
-    font-size: ${({theme}) => parseInt(theme.font.size) * 1.5}px;
   }
 
   .links-form {
@@ -84,7 +78,7 @@ const StyledLinks = styled.div`
   .link-item__delete {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 5px;
     z-index: 1000;
     opacity: 0;
   }
@@ -92,7 +86,7 @@ const StyledLinks = styled.div`
   .link-item__edit {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 5px;
     z-index: 1000;
     opacity: 0;
   }
@@ -115,7 +109,7 @@ const StyledLinks = styled.div`
   }
 
   .link-item__a {
-    width: 80px;
+    width: 60px;
     height: 63px;
     display: flex;
     flex-direction: column;

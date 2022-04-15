@@ -4,9 +4,9 @@ import Button from 'ui/Button';
 
 import {useAppDispatch} from 'store/hooks';
 import {addLink, editLink} from 'store/stores/main/mainSlice';
-import {getIcon} from '../Links.utils';
-import {LinksContext} from '../Links';
-import {setImg, setTitle, setUrl} from '../localStore/Links.actions';
+import {getIcon} from './Links.utils';
+import {LinksContext} from './Links';
+import {setImg, setTitle, setUrl} from './localStore/Links.actions';
 
 const LinksForm = ({setOpenForm}) => {
   const {data, localDispatch} = useContext(LinksContext);

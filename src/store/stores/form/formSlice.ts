@@ -1,24 +1,19 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TLink} from '../main/types';
 
 interface IMain {
-  todoForm: {
-    inputValue: string;
-    newTodoWithDate: boolean;
-    newTodoWithTime: boolean;
-    selectedDate: string;
-    selectedTime: string;
-  };
+  inputValue: string;
+  newTodoWithDate: boolean;
+  newTodoWithTime: boolean;
+  selectedDate: string;
+  selectedTime: string;
 }
 
 const initialState: IMain = {
-  todoForm: {
-    inputValue: '',
-    newTodoWithDate: false,
-    newTodoWithTime: false,
-    selectedDate: null,
-    selectedTime: null,
-  },
+  inputValue: '',
+  newTodoWithDate: false,
+  newTodoWithTime: false,
+  selectedDate: null,
+  selectedTime: null,
 };
 
 export const formSlice = createSlice({
@@ -26,22 +21,26 @@ export const formSlice = createSlice({
   initialState,
   reducers: {
     setInputValue: (state, {payload}: PayloadAction<string>) => {
-      state.todoForm.inputValue = payload;
+      state.inputValue = payload;
     },
     includeDate: (state, {payload}: PayloadAction<boolean>) => {
-      state.todoForm.newTodoWithDate = payload;
+      state.newTodoWithDate = payload;
     },
     includeTime: (state, {payload}: PayloadAction<boolean>) => {
-      state.todoForm.newTodoWithTime = payload;
+      state.newTodoWithTime = payload;
     },
     selectDate: (state, {payload}: PayloadAction<string>) => {
-      state.todoForm.selectedDate = payload;
+      state.selectedDate = payload;
     },
     selectTime: (state, {payload}: PayloadAction<string>) => {
-      state.todoForm.selectedTime = payload;
+      state.selectedTime = payload;
     },
     resetTodoForm: (state) => {
-      state.todoForm = initialState.todoForm;
+      state.inputValue = '';
+      state.newTodoWithDate = false;
+      state.newTodoWithTime = false;
+      state.selectedDate = null;
+      state.selectedTime = null;
     },
   },
 });

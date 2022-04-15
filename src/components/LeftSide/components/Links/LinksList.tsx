@@ -2,8 +2,8 @@ import React, {useContext, useRef} from 'react';
 
 import {useAppDispatch, useAppSelector} from 'store/hooks';
 import {deleteLink, replaceLinks} from 'store/stores/main/mainSlice';
-import {LinksContext} from '../Links';
-import {setEdit} from '../localStore/Links.actions';
+import {LinksContext} from './Links';
+import {setEdit} from './localStore/Links.actions';
 
 const LinksList = () => {
   const {localDispatch} = useContext(LinksContext);

@@ -10,11 +10,11 @@ const TodoFormOptions = ({toggleIncludeDate, toggleIncludeTime}) => {
   const dispatch = useAppDispatch();
   const {newTodoWithDate, newTodoWithTime, selectedDate, selectedTime} =
     useAppSelector(({form}) => ({
-      inputValue: form.todoForm.inputValue,
-      newTodoWithDate: form.todoForm.newTodoWithDate,
-      newTodoWithTime: form.todoForm.newTodoWithTime,
-      selectedDate: form.todoForm.selectedDate,
-      selectedTime: form.todoForm.selectedTime,
+      inputValue: form.inputValue,
+      newTodoWithDate: form.newTodoWithDate,
+      newTodoWithTime: form.newTodoWithTime,
+      selectedDate: form.selectedDate,
+      selectedTime: form.selectedTime,
     }));
 
   return (
