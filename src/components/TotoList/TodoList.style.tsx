@@ -37,9 +37,6 @@ const StyledTodoList = styled.div`
 
   .close-btn {
     font-size: 22px;
-    &:hover {
-      color: ${({theme}) => theme.colors.primary};
-    }
   }
 
   .todo-form-input {
@@ -62,6 +59,11 @@ const StyledTodoList = styled.div`
     position: absolute;
     top: 0;
     right: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: ${({theme}) => theme.colors.primary};
+    }
   }
 
   .view-state {
@@ -162,7 +164,7 @@ const StyledTodoList = styled.div`
   }
 
   .fa-solid {
-    cursor: pointer;
+    pointer-events: none;
   }
 
   .control-button {
@@ -177,6 +179,7 @@ const StyledTodoList = styled.div`
     border: 1px solid;
     border-color: ${({theme}) => theme.colors.primary};
     border-radius: 3px;
+    cursor: pointer;
 
     &:active {
       background-color: ${({theme}) => theme.colors.darken};

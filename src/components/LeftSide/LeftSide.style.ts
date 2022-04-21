@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledLeftSide = styled.div`
   width: 30%;
@@ -10,7 +10,7 @@ const StyledLeftSide = styled.div`
 
   .tab-switcher__item {
     padding: 2px 5px 0;
-    border: 2px solid ${({ theme }) => theme.colors.font};
+    border: 2px solid ${({theme}) => theme.colors.font};
     border-bottom: 0;
     border-radius: 3px;
     border-bottom-left-radius: 0;
@@ -24,15 +24,16 @@ const StyledLeftSide = styled.div`
   }
 
   .active {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({theme}) => theme.colors.primary};
   }
 
   .left-side-inner {
     width: 85%;
     min-height: 260px;
+    margin-bottom: 15px;
     position: relative;
     padding: 15px;
-    border: 2px solid ${({ theme }) => theme.colors.font};
+    border: 2px solid ${({theme}) => theme.colors.font};
     border-radius: 3px;
   }
 
@@ -56,7 +57,7 @@ const StyledLeftSide = styled.div`
     position: relative;
     padding: 10px;
     border: 2px solid;
-    border-color: ${({ theme }) => theme.colors.font};
+    border-color: ${({theme}) => theme.colors.font};
     border-radius: 3px;
   }
 
@@ -70,7 +71,7 @@ const StyledLeftSide = styled.div`
   .close-btn {
     font-size: 22px;
     &:hover {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({theme}) => theme.colors.primary};
     }
   }
 
@@ -103,8 +104,8 @@ const StyledLeftSide = styled.div`
   .notes-form__input {
     width: 50%;
     margin-bottom: 10px;
-    font-family: ${({ theme }) => theme.font.family};
-    color: ${({ theme }) => theme.colors.font};
+    font-family: ${({theme}) => theme.font.family};
+    color: ${({theme}) => theme.colors.font};
     border: 0;
     border-bottom: 2px solid;
     background-color: transparent;
@@ -128,11 +129,11 @@ const StyledLeftSide = styled.div`
   }
 
   .delete-btn {
-    font-size: ${({ theme }) => parseInt(theme.font.size) * 0.7}px;
+    font-size: ${({theme}) => parseInt(theme.font.size) * 0.7}px;
   }
 
   .edit-btn {
-    font-size: ${({ theme }) => parseInt(theme.font.size) * 0.5}px;
+    font-size: ${({theme}) => parseInt(theme.font.size) * 0.5}px;
   }
 
   .link-item__icon {
@@ -140,7 +141,7 @@ const StyledLeftSide = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({theme}) => theme.colors.primary};
     }
   }
 
@@ -149,8 +150,8 @@ const StyledLeftSide = styled.div`
     height: 63px;
     display: flex;
     flex-direction: column;
-    font-size: ${({ theme }) => parseInt(theme.font.size) * 0.8}px;
-    color: ${({ theme }) => theme.colors.font};
+    font-size: ${({theme}) => parseInt(theme.font.size) * 0.8}px;
+    color: ${({theme}) => theme.colors.font};
     align-items: center;
     text-decoration: none;
     word-break: break-word;
@@ -176,8 +177,8 @@ const StyledLeftSide = styled.div`
   }
 
   .textarea {
-    font-family: ${({ theme }) => theme.font.family};
-    border: 2px solid ${({ theme }) => theme.colors.font};
+    font-family: ${({theme}) => theme.font.family};
+    border: 2px solid ${({theme}) => theme.colors.font};
     border-radius: 3px;
     appearance: none;
     resize: none;
@@ -206,7 +207,7 @@ const StyledLeftSide = styled.div`
     cursor: pointer;
 
     &:hover {
-      border-color: ${({ theme }) => theme.colors.font};
+      border-color: ${({theme}) => theme.colors.font};
     }
   }
 
@@ -226,15 +227,15 @@ const StyledLeftSide = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 5px;
-    color: ${({ theme }) => theme.colors.font};
-    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({theme}) => theme.colors.font};
+    background-color: ${({theme}) => theme.colors.primary};
     border: 1px solid;
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({theme}) => theme.colors.primary};
     border-radius: 3px;
     cursor: pointer;
 
     &:active {
-      background-color: ${({ theme }) => theme.colors.darken};
+      background-color: ${({theme}) => theme.colors.darken};
     }
   }
 

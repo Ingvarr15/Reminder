@@ -21,7 +21,10 @@ const TodoItem = ({todo, edit, setEdit, handleSubmitEdit}) => {
             onChange={(e) => setEditValue(e.currentTarget.value)}
           />
           <div className="todo-control">
-            <button className="control-button" onClick={handleSubmitEdit}>
+            <button
+              className="control-button"
+              onClick={(e) => handleSubmitEdit(e, editValue)}
+            >
               <i className="fa-solid fa-check"></i>
             </button>
             <button
