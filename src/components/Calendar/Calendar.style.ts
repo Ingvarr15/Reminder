@@ -39,10 +39,6 @@ const StyledCalendar = styled.div`
     border: 1px solid;
   }
 
-  /* .react-calendar__tile--active {
-    background-color: ${({theme}) => theme.colors.blur} !important;
-  } */
-
   .react-calendar__tile {
     height: 50px;
     position: relative;
