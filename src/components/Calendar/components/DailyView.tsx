@@ -12,7 +12,7 @@ const DailyView = ({shownDate, todayTodos}) => {
           {'<'}Nothing...{'>'}
         </div>
       ) : (
-        <ul>
+        <ul className="daily-list">
           {todayTodos.map((todo: TTodo) => (
             <li
               className={classnames({'completed-todo': todo.done})}

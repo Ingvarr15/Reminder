@@ -1,14 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TTodo} from './types';
+import {TTodo, TLink} from './types';
+import store from 'store/store';
 
 interface IMain {
   theme: string;
   todos: TTodo[];
+  links: TLink[];
 }
 
 const initialState: IMain = {
   theme: 'orangeGreen',
   todos: [],
+  links: [],
 };
 
 export const mainSlice = createSlice({
@@ -22,6 +25,7 @@ export const mainSlice = createSlice({
         );
         state.theme = loadedState.theme || initialState.theme;
         state.todos = loadedState.todos || initialState.todos;
+        state.links = loadedState.links || initialState.links;
       }
     },
     saveState: (state) => {
@@ -30,6 +34,7 @@ export const mainSlice = createSlice({
         JSON.stringify({
           theme: state.theme,
           todos: state.todos,
+          links: state.links,
         }),
       );
     },
@@ -57,6 +62,22 @@ export const mainSlice = createSlice({
       const filteredTodos = state.todos.filter((todo) => todo.id !== payload);
       state.todos = filteredTodos;
     },
+    addLink: (state, {payload}: PayloadAction<TLink>) => {
+      state.links.push(payload);
+    },
+    deleteLink: (state, {payload}: PayloadAction<string>) => {
+      const filteredLinks = state.links.filter((link) => link.id !== payload);
+      state.links = filteredLinks;
+    },
+    replaceLinks: (state, {payload}: PayloadAction<TLink[]>) => {
+      state.links = payload;
+    },
+    editLink: (state, {payload}: PayloadAction<TLink>) => {
+      const newLinks = state.links.map((link) =>
+        link.id === payload.id ? (link = payload) : {...link},
+      );
+      state.links = newLinks;
+    },
   },
 });
 
@@ -68,5 +89,9 @@ export const {
   checkTodo,
   editTodo,
   deleteTodo,
+  addLink,
+  deleteLink,
+  replaceLinks,
+  editLink,
 } = mainSlice.actions;
 export default mainSlice.reducer;

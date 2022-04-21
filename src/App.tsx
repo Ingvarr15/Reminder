@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import Links from 'components/Links/Links';
+import LeftSide from 'components/LeftSide/LeftSide';
 import TodoList from 'components/TotoList/TodoList';
 import Calendar from './components/Calendar/Calendar';
 
@@ -11,9 +11,10 @@ import {loadState, saveState} from 'store/stores/main/mainSlice';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const {todos, theme} = useAppSelector(({main}) => ({
+  const {todos, theme, links} = useAppSelector(({main}) => ({
     todos: main.todos,
     theme: main.theme,
+    links: main.links,
   }));
 
   useEffect(() => {
@@ -22,12 +23,12 @@ const App = () => {
 
   useEffect(() => {
     dispatch(saveState());
-  }, [todos, theme]);
+  }, [todos, theme, links]);
 
   return (
     <StyledThemeProvider>
       <AppContainer>
-        <Links />
+        <LeftSide />
         <TodoList />
         <Calendar />
       </AppContainer>

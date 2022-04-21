@@ -16,7 +16,7 @@ const initialState: IMain = {
   selectedTime: null,
 };
 
-export const mainSlice = createSlice({
+export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
@@ -35,9 +35,22 @@ export const mainSlice = createSlice({
     selectTime: (state, {payload}: PayloadAction<string>) => {
       state.selectedTime = payload;
     },
+    resetTodoForm: (state) => {
+      state.inputValue = '';
+      state.newTodoWithDate = false;
+      state.newTodoWithTime = false;
+      state.selectedDate = null;
+      state.selectedTime = null;
+    },
   },
 });
 
-export const {setInputValue, includeDate, includeTime, selectDate, selectTime} =
-  mainSlice.actions;
-export default mainSlice.reducer;
+export const {
+  setInputValue,
+  includeDate,
+  includeTime,
+  selectDate,
+  selectTime,
+  resetTodoForm,
+} = formSlice.actions;
+export default formSlice.reducer;
