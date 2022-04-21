@@ -1,14 +1,14 @@
-import React, {useContext, useRef} from 'react';
+import React, { useContext, useRef } from "react";
 
-import {useAppDispatch, useAppSelector} from 'store/hooks';
-import {deleteLink, replaceLinks} from 'store/stores/main/mainSlice';
-import {LinksContext} from './Links';
-import {setEdit} from './localStore/Links.actions';
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { deleteLink, replaceLinks } from "store/stores/main/mainSlice";
+import { LinksContext } from "./Links";
+import { setEdit } from "./localStore/Links.actions";
 
 const LinksList = () => {
-  const {localDispatch} = useContext(LinksContext);
+  const { localDispatch } = useContext(LinksContext);
   const dispatch = useAppDispatch();
-  const {links} = useAppSelector(({main, form}) => ({
+  const { links } = useAppSelector(({ main, form }) => ({
     links: main.links,
   }));
   const dragItem = useRef(null);
@@ -33,6 +33,14 @@ const LinksList = () => {
     dragOverItem.current = null;
     dispatch(replaceLinks(copyListItems));
   };
+
+  if (links.length === 0) {
+    return (
+      <div className="section-is-empty">
+        {"<"}Empty...{">"}
+      </div>
+    );
+  }
 
   return (
     <ul className="links-list">
