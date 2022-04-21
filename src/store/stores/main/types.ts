@@ -12,3 +12,9 @@ export type TLink = {
   img: string;
   url: string;
 };
+
+export type TNote = {
+  id: string;
+  title: string;
+  text: string;
+};

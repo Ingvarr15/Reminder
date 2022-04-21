@@ -1,16 +1,15 @@
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useReducer } from "react";
 
-import Button from 'ui/Button';
-import LinksForm from './LinksForm';
-import LinksList from './LinksList';
+import Button from "ui/Button";
+import LinksForm from "./LinksForm";
+import LinksList from "./LinksList";
 
-import StyledLinks from './Links.style';
-import {setOpenForm} from './localStore/Links.actions';
+import { setOpenForm } from "./localStore/Links.actions";
 import reducer, {
   ILinksForm,
   initialState,
   resetState,
-} from './localStore/Links.reducer';
+} from "./localStore/Links.reducer";
 
 export const LinksContext = createContext<{
   data: ILinksForm;
@@ -24,10 +23,10 @@ const Links = () => {
   const [data, localDispatch] = useReducer(reducer, initialState, resetState);
 
   return (
-    <LinksContext.Provider value={{data, localDispatch}}>
-      <StyledLinks>
+    <LinksContext.Provider value={{ data, localDispatch }}>
+      <div>
         {data.isOpened ? (
-          <LinksForm setOpenForm={setOpenForm} />
+          <LinksForm />
         ) : (
           <>
             <div className="links-header">
@@ -42,7 +41,7 @@ const Links = () => {
             <LinksList />
           </>
         )}
-      </StyledLinks>
+      </div>
     </LinksContext.Provider>
   );
 };
